@@ -1,0 +1,30 @@
+import java.io.IOException;
+import java.io.InputStream;
+
+public class FileController {
+    private FileModel model;
+    private FileView view;
+
+    public FileController(FileModel model, FileView view) {
+        this.model = model;
+        this.view = view;
+    }
+
+    public void uploadFile(InputStream fileData, String fileName) {
+        try {
+            model.uploadFile(fileName, fileData);
+            view.showSuccessMessage("Upload");
+        } catch (IOException e) {
+            view.showErrorMessage("Upload", e.getMessage());
+        }
+    }
+
+    public void mergeFiles() {
+        try {
+            model.mergeFiles();
+            view.showSuccessMessage("Merge");
+        } catch (IOException e) {
+            view.showErrorMessage("Merge", e.getMessage());
+        }
+    }
+}
